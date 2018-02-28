@@ -1,0 +1,32 @@
+/*start ofnavigation bar*/
+.icon
+{
+    width:30px;
+    height: 25px;
+    padding-right: 5px;
+}
+.coolbg
+{
+    background-image: url("../images/coolbg.jpeg")
+}
+.coolbg2
+{
+    background-color: #fff;
+}
+.padding
+{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+/*end of navigation bar*/
+
+/*sign up*/
+.margin-extend
+{
+    margin-top: 120px;
+}
+.padding
+{
+    padding: 15px;
+}
+/*end of sign up*/
