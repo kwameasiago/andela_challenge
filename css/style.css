@@ -5,6 +5,8 @@
     height: 25px;
     padding-right: 5px;
 }
+/*end of navigation bar*/
+/*start of cool bg cool favicon*/
 .coolbg
 {
     background-image: url("../images/coolbg.jpeg")
@@ -13,20 +15,118 @@
 {
     background-color: #fff;
 }
+.coolbg3
+{
+    background-color: aqua;
+}
+.coolbg4
+{
+    background-color: #130b0d;
+}
 .padding
 {
     padding-top:20px;
     padding-bottom:20px;
 }
-/*end of navigation bar*/
+.favi
+{
+    font-size: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color:#fff;
+}
+.icon-word
+{
+    font-size:20px;
+    color:#fff;
+}
+@media (max-width:600px) 
+{
+    .favi
+    {
+        font-size: 30px;
+        padding-left: 23px;
+        padding-right: 23px;
+    }
+    .icon-word
+    {
+        font-size: 10px;
+    }
+    .m
+    {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+}
+/*end of coolbg cool favicon*/
 
 /*sign up*/
 .margin-extend
 {
     margin-top: 120px;
 }
-.padding
-{
-    padding: 15px;
-}
 /*end of sign up*/
+/*start check out bizna*/
+.size
+{
+    width: 374px;
+    height: 255px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+/*end of checkout bizna*/
+/*start of intro*/
+.intro
+{
+    color:#fff;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 30px;
+    font-size: 16px;
+}
+.team
+{
+    width:200px;
+    height: 250px;
+}
+/*end of intro*/
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button .active {
+    background-color: #ccc;
+
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 20px 32px;
+    font-size: 16px;
+}
+
+/*start of My post*/
+.mypost
+{
+    margin-top:50px;
+}
+.edit
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+/*end of My post*/
