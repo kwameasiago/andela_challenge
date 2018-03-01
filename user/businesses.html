@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bizna</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.js"></script>
+</head>
+<body class="coolbg">
+<!--start of the navigation bar-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BIZNA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li class="active"><a href="businesses.html">BUSINESSES</a></li> 
+        <li><a href="mybusinesses.html">MY BUSINESSES</a></li>
+        <li><a href="contact.html">CONTACT US</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <img src="../images/maleuser.png" class="icon"/>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">My profile</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+<!--end of the navigation bar-->
+<!--start of  jumbotron-->
+<div class="container-fluid">
+  <div class="jumbotron">
+    <div class="text-center text-primary">
+    <h1>Welcome to Bizna</h1>
+    <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
+       typesetting industry. </p>
+      </div>
+  </div>
+</div>
+<!--end of jumbotron-->
+
+<!--start of filter-->
+<div class="container-fluid coolbg2 padding">
+    <h2 class="text-center">FILTER</h2>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <form class="form-group">
+                <div class="col-md-5">
+                    <input type="text" placeholder="Location" name="location" class="form-control"/>
+                </div>
+                <div class="col-md-5">
+                        <input type="text" placeholder="Category" name="Category" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                        <input type="submit" value="FILTER"  class="form-control btn"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of filetr-->
+
+<!--start of businesses-->
+<div class="container-fluid coolbg2 padding">
+  <div class="row">
+    <h2 class="text-center text-primary padding">Businesses</h2>
+    <center>
+    <div class="col-md-4">
+      <!--start of pop--> 
+      <!-- Trigger a pop up-->
+      <img src="../images/bizna1.jpeg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#VirtualMeeting"/>
+
+  <!-- Modal -->
+  <div class="modal fade" id="VirtualMeeting" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">close</button>
+          <h4 class="modal-title">VIRTUAL MEETING</h4>
+        </div>
+        <div class="modal-body">
+          <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-default" href="single.html">MORE</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!--end of pop-->
+</div>
+
+<div class="col-md-4">
+    <!--start of pop--> 
+    <!-- Trigger a pop up-->
+    <img src="../images/bizna2.jpg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#CHAKULAINN"/>
+
+<!-- Modal -->
+<div class="modal fade" id="CHAKULAINN" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">close</button>
+        <h4 class="modal-title">CHAKULA INN</h4>
+      </div>
+      <div class="modal-body">
+        <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="single.html">MORE</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!--end of pop-->
+</div>
+
+<div class="col-md-4">
+    <!--start of pop--> 
+    <!-- Trigger a pop up-->
+    <img src="../images/bizna3.jpg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#CLADCLOTHING"/>
+
+<!-- Modal -->
+<div class="modal fade" id="CLADCLOTHING" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">close</button>
+        <h4 class="modal-title">CLAD CLOTHING</h4>
+      </div>
+      <div class="modal-body">
+        <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="single.html">MORE</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!--end of pop-->
+</div>
+
+<div class="col-md-4">
+    <!--start of pop--> 
+    <!-- Trigger a pop up-->
+    <img src="../images/bizna4.jpeg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#KINGSMEAL"/>
+
+<!-- Modal -->
+<div class="modal fade" id="KINGSMEAL" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">close</button>
+        <h4 class="modal-title">KINGS MEAL</h4>
+      </div>
+      <div class="modal-body">
+        <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="single.html">MORE</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!--end of pop-->
+</div>
+
+<div class="col-md-4">
+    <!--start of pop--> 
+    <!-- Trigger a pop up-->
+    <img src="../images/bizna5.jpeg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#CYBERSECURE"/>
+
+<!-- Modal -->
+<div class="modal fade" id="CYBERSECURE" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">close</button>
+        <h4 class="modal-title">CYBER SECURE</h4>
+      </div>
+      <div class="modal-body">
+        <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="single.html">MORE</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!--end of pop-->
+</div>
+
+<div class="col-md-4">
+    <!--start of pop--> 
+    <!-- Trigger a pop up-->
+    <img src="../images/bizna6.jpg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#MTOTODAYCARE"/>
+
+<!-- Modal -->
+<div class="modal fade" id="MTOTODAYCARE" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">close</button>
+        <h4 class="modal-title">MTOTO DAYCARE</h4>
+      </div>
+      <div class="modal-body">
+        <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="single.html">MORE</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!--end of pop-->
+</div>
+<div class="col-md-4">
+        <!--start of pop--> 
+        <!-- Trigger a pop up-->
+        <img src="../images/bizna7.jpg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#FINEART"/>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="FINEART" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">close</button>
+            <h4 class="modal-title">FINE ART</h4>
+          </div>
+          <div class="modal-body">
+            <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" href="single.html">MORE</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!--end of pop-->
+    </div>
+
+
+    <div class="col-md-4">
+            <!--start of pop--> 
+            <!-- Trigger a pop up-->
+            <img src="../images/bizna8.jpg" alt="cool bizna" class="img-rounded img-responsive size" data-toggle="modal" data-target="#SOMEGYM"/>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="SOMEGYM" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">close</button>
+                <h4 class="modal-title">SOME GYM</h4>
+              </div>
+              <div class="modal-body">
+                <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ...</p>
+              </div>
+              <div class="modal-footer">
+                <a class="btn btn-default" href="single.html">MORE</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!--end of pop-->
+        </div>
+  </center>
+  </div>
+</div>
+<!--end of businesses-->
+
+<!--start of footer-->
+<div class="container-fluid padding coolbg4">
+  <div class="row">
+      <div class="col-md-6 col-sm-3 -m">
+      <span class="fa fa-youtube favi"></span>
+      <span class="fa fa-facebook favi"></span>
+      <span class="fa fa-instagram favi"></span>
+      <span class="fa fa-twitter favi"></span>
+    </div>
+    <div class="col-md-6 col-sm-3 -m">
+        <span class="fa fa-envelope favi"></span><i class="padding icon-word"> info@bizna.com</i>
+        <span class="fa fa-volume-control-phone favi"></span> <i class="padding icon-word">07165486564</i>
+      </div>
+  </div>
+</div>
+
+
+
+<!--end of footer-->
+</body>
+</html>

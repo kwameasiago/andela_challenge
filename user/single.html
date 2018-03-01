@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bizna</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.js"></script>
+</head>
+<body class="coolbg">
+<!--start of the navigation bar-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BIZNA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">HOME</a></li>
+        <li class="active"><a href="about.html">ABOUT</a></li>
+        <li><a href="businesses.html">BUSINESSES</a></li> 
+        <li><a href="mybusinesses.html">MY BUSINESSES</a></li>
+        <li><a href="contact.html">CONTACT US</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <img src="../images/maleuser.png" class="icon"/>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">My profile</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+<!--end of the navigation bar-->
+<!--start of  jumbotron-->
+<div class="container-fluid">
+        <div class="jumbotron">
+          <div class="text-center text-primary">
+          <h1>Welcome to Bizna</h1>
+          <p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
+             typesetting industry. </p>
+            </div>
+        </div>
+      </div>
+      <!--end of jumbotron-->
+      
+<!--start of business single intro-->
+<div class="container-fluid coolbg2">
+    <div class="row">
+            <div class="col-md-12">
+                    <div class="col-md-4">
+                            <img src="../images/bizna1.jpeg" alt="cool bizna" class="img-rounded img-responsive size" />
+                    </div>
+                    <div class="col-md-6 mypost">
+                        <div class="mypost">
+                        <h3>VIRTUAL MEETING</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a g</p>
+                        
+                        </div>
+                    </div>
+    </div>
+</div>
+<!--end of business single intro-->
+
+<!--start of testimonial-->
+<div class="container-fluid coolbg2">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+            <div class="tab">
+                <button class="tablinks" onclick="testimonial(event, 'hours')" id="defaultOpen">Working Hours</button>
+                <button class="tablinks" onclick="testimonial(event, 'review')">Review</button>
+            </div>
+            </center>        
+            <div id="hours" class="tabcontent">
+                <h3 class="text-center">Working hours</h3>
+                <p class="text-center">FROM 8:00 am TO 8:00 pm</p>
+            </div>
+                       
+            <div id="review" class="tabcontent">
+                <center>
+                <h3>Reviews</h3>
+            <span class="fa fa-star" style="font-size:20px; color:yellow;"></span>
+            <span class="fa fa-star" style="font-size:20px; color:yellow;"></span>
+            <span class="fa fa-star" style="font-size:20px; color:yellow;"></span>
+            <span class="fa fa-star" style="font-size:20px;"></span>
+            <span class="fa fa-star" style="font-size:20px;"></span>
+        </center>
+            </div>
+         
+            <div id="testimonial3" class="tabcontent">
+                 <h3>testimonial 3</h3>
+                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. I.</p>
+            </div>
+            <div id="testimonial4" class="tabcontent">
+                <h3>testimonial 4</h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. I</p>
+            </div>
+           
+        </div> 
+    </div> 
+</div>
+<!--end of testimonial-->
+
+<!--start of footer-->
+<div class="container-fluid padding coolbg4">
+  <div class="row">
+    <div class="col-md-6 col-sm-3 -m">
+      <span class="fa fa-youtube favi"></span>
+      <span class="fa fa-facebook favi"></span>
+      <span class="fa fa-instagram favi"></span>
+      <span class="fa fa-twitter favi"></span>
+    </div>
+    <div class="col-md-6 col-sm-3 -m">
+        <span class="fa fa-envelope favi"></span><i class="padding icon-word"> info@bizna.com</i>
+        <span class="fa fa-volume-control-phone favi"></span> <i class="padding icon-word">07165486564</i>
+      </div>
+  </div>
+</div>
+
+
+
+<!--end of footer-->
+<script src="../js/testimonials.js"></script>
+        
+</body>
+</html>
