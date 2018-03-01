@@ -8,6 +8,9 @@ These instruction will help you understand the user interface for the Bizna Syst
 PREREQUISITES
 There are no prerequisites at this stage in development
 
+APPROACH
+I opted to use a simpe User interface that will not be a taskfull to the normal user
+
 INSTALLING
 To install the user interface for Bizna just copy the files as they are. For further understanding check the file structure pdf file located in the mock up folder
 NB 
