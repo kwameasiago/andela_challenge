@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bizna</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
+</head>
+<body class="coolbg">
+<!--start of the navigation bar-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BIZNA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="index.html">
+          <img src="images/login.png" class="icon"/>LOG IN
+        </a></li>
+        <li><a href="signup.html">
+          <img src="images/signup.png" class="icon"/>SIGN UP
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+<!--end of the navigation bar-->
+
+
+<!--start of login form-->
+<div class="container-fluid margin-extend">
+	<h1 class="text-center text-primary">SIGN UP</h1>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<form class="form-group" action="user/index.html" action="POST">
+		<label>EMAIL</label>
+		<input type="email" name="email" placeholder="ENTER YOUR EMAIL" class="form-control">
+		<label>PASSWORD</label>
+		<input type="password" name="password" placeholder="ENTER YOUR PASSWORD" class="form-control">
+		</br>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+		<input type="submit" class="btn btn-primary form-control" value="SIGN IN">	
+		</div>
+		<div class="col-md-4"></div>
+		</form>
+		</div>
+	</div>
+</div>
+<!--end of login form-->
+</body>
+</html>
