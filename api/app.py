@@ -5,7 +5,7 @@ api=Api(app)
 
 @app.route('/')
 def index():
-	return "Flask is set up"
+	return "Flask  and restplus is set up"
 
 if __name__=='__main__':
 	app.run(debug=True)
