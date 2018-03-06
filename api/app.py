@@ -19,7 +19,7 @@ registerModel = api.model('registerModel',{
 	})
 #end of api model
 
-@api.route('/register')
+@api.route('/api/auth/register')
 class register(Resource):
 	@api.expect(registerModel)
 	def post(self):
