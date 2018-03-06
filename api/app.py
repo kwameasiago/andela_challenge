@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restplus import Api,Resource,fields
+from  werkzeug.security import generate_password_hash , check_password_hash
 from models import user
 
 
@@ -32,12 +33,12 @@ class register(Resource):
 		elif userObj.emailCheck(email)==False:
 			return {"result":"mast be a valid email"}
 		else:
+			newUser['password']=generate_password_hash(newUser['password'],"sha256")
 			userObj.users.append(newUser)
 			return {"result":"added to database"}
-
 	def get(self):
 		return userObj.users
-		
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
