@@ -1,13 +1,16 @@
 from flask import Flask
 from flask_restplus import Api,Resource,fields
-from model import users
+from models import user
 
 
-app=Flask(__name__)
-api=Api(app)
-userObj=users()
+app = Flask(__name__)
+api = Api(app)
+userObj = user()
+
+
+
 #start of api model
-registerModel=api.model('registerModel',{
+registerModel = api.model('registerModel',{
 	"firstName":fields.String,
 	"lastName":fields.String,
 	"email":fields.String,
@@ -21,19 +24,18 @@ class register(Resource):
 	@api.expect(registerModel)
 	def post(self):
 		newUser = api.payload
-		email=newUser['email']
+		email = newUser['email']
 		if newUser['password'] != newUser['confirmPassword']:
 			return {"result":"password do not match"}
-		elif userObj.findin(userObj.users,email)==True
+		elif userObj.findin(userObj.users,email) == True:
 			return {"result":"email already exist"}
 		else:
 			userObj.users.append(newUser)
-			return {"result":"post added"}
+			return {"result":"added to database"}
 
 	def get(self):
 		return userObj.users
 		
 
-
-if __name__=='__main__':
+if __name__ == '__main__':
 	app.run(debug=True)
