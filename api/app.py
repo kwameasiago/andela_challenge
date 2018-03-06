@@ -27,8 +27,10 @@ class register(Resource):
 		email = newUser['email']
 		if newUser['password'] != newUser['confirmPassword']:
 			return {"result":"password do not match"}
-		elif userObj.findin(userObj.users,email) == True:
+		elif userObj.findIn(userObj.users,email) == True:
 			return {"result":"email already exist"}
+		elif userObj.emailCheck(email)==False:
+			return {"result":"mast be a valid email"}
 		else:
 			userObj.users.append(newUser)
 			return {"result":"added to database"}
