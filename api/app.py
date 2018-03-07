@@ -1,85 +1,57 @@
 from flask import Flask,request
+import json
 from flask_restplus import Api,Resource,fields
 from  werkzeug.security import generate_password_hash , check_password_hash
-from models import user
+from models import User
 
 
 app = Flask(__name__)
 api = Api(app)
-userObj = user()
+user_obj = User()
 
 
 
-#start of api model
-registerModel = api.model('registerModel',{
-	"firstName":fields.String,
-	"lastName":fields.String,
-	"email":fields.String,
-	"password":fields.String,
-	"confirmPassword":fields.String,
+#api model
+register_model = api.model('registerModel',{
+	"first_name" : fields.String,
+	"last_name" : fields.String,
+	"email" : fields.String,
+	"password" : fields.String,
+	"confirm_password" : fields.String
 	})
-loginModel=api.model('loginModel',{
-	"email":fields.String,
-	"password":fields.String
-	})
-logoutModel=api.model('logoutModel',{
-	"logout":fields.String
-	})
-passwordResetModel=api.model("passwordResetModel",{
-	"oldPassword":fields.String,
-	"newPassword":fields.String,
-	"confirmPassword":fields.String
-	})
-registerBusinessModel=api.model("registerBusinessModel",{
-	'title':fields.String,
-	'description':fields.String,
-	'author':fields.String,
-	'businessId':fields.Integer
-	})
-updateBusinessModel=api.model('updateBusinessModel',{
-	'title':fields.String,
-	'description':fields.String,
-	})
-businessModel=api.model('businessModel',{
-	'businessId':fields.Integer
-	})
-#end of api model
 
 
 #user registration endpoint
 @api.route('/api/auth/register')
-class register(Resource):
-	@api.expect(registerModel)
+class Register(Resource):
+	@api.expect(register_model)
 	def post(self):
-		newUser=api.payload
-		#email=str(request.data.get('email',''))
-		#email = newUser['email']
-		if newUser['password'] != newUser['confirmPassword']:
-		 	return {"result":"password do not match"}
-		elif userObj.findIn(userObj.users,newUser['email']) == True:
-		 	return {"result":"email already exist"}
-		elif userObj.emailCheck(newUser['email'])==False:
-			return {"result":"mast be a valid email"}
-		else:
-		 	newUser['password']=generate_password_hash(newUser['password'],"sha256")
-		 	del newUser['confirmPassword']
-		 	userObj.users.append(newUser)
-		 	return {"result":"added to database"}
-	def get(self):
-		return {'test':'123'}
+		new_user = request.get_json()
+		password_match=user_obj.password_match(
+			new_user['password'],new_user['confirm_password']
+		)
 
-#user login end point 
+		if password_match == False:
+			return {'Error':'passwords do not match'}
+		elif user_obj.email_exist(new_user['email']) == True:
+			return {'Error':'email aready exists'}
+		elif user_obj.email_verification(new_user['email']) == False:
+			return {'Error':'Incorrect Email syntax'}
+		else:
+			return {'ok':''}
+
+
 @api.route('/api/auth/login')
 class login(Resource):
-	@api.expect(loginModel)
+	@api.expect()
 	def post(self):
 		pass
-
+		
 
 #user logout endpoint
 @api.route('/api/auth/logout')
 class logout(Resource):
-	@api.expect(logoutModel)
+	@api.expect()
 	def post(self):
 		pass
 
@@ -87,7 +59,7 @@ class logout(Resource):
 #user password reset
 @api.route('/api/auth/reset-password')
 class passwordReset(Resource):
-	@api.expect(passwordResetModel)
+	@api.expect()
 	def post(self):
 		pass
 
@@ -95,21 +67,21 @@ class passwordReset(Resource):
 #register Business
 @api.route('/api/businesses')
 class registerBusiness(Resource):
-	@api.expect(registerBusinessModel)
+	@api.expect()
 	def post(self):
 		pass
 
 #update a Business profile
 @api.route('/api/businesses/<businessId>')
 class updateBusiness(Resource):
-	@api.expect(updateBusinessModel)
+	@api.expect()
 	def put(self,businessId):
 		pass
 
 #delete/view a business
 @api.route('/api/businesses/<businessId>')
 class Business(Resource):
-	@api.expect(businessModel)
+	@api.expect()
 	def delete(self,businessId):
 		pass
 	def get(self):
