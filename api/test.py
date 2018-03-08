@@ -42,29 +42,51 @@ class registerTest(unittest.TestCase):
 		test = app.test_client('self')
 		response = test.post('/api/auth/login',data=json.dumps(self.newInfo),headers=self.header)
 		self.assertTrue(response.status_code==200)
+
 	def test_logout(self):
 		test=app.test_client('self')
 		response = test.post('/api/auth/logout', data=json.dumps(self.logout),headers=self.header)
 		self.assertEqual(response.status_code,200)
+
 	def test_password_reset(self):
 		test=app.test_client('self')
 		response=test.post('/api/auth/reset-password',data=json.dumps(self.password_reset),headers=self.header)
 		self.assertEqual(response.status_code,200)
+
+	def test_business_get(self):
+		test=app.test_client('self')
+		response=test.post('/api/businesses',data=json.dumps(self.business),headers=self.header)
+		self.assertEqual(response.status_code,200)
+	def test_update_business(self):
+		test=app.test_client('self')
+		response=test.post('/api/businesses',data=json.dumps(self.business),headers=self.header)
+		self.assertEqual(response.status_code,200)
+
+	def test_delete_business(self):
+		test=app.test_client('self')
+		response=test.delete('/api/businesses/0',data=json.dumps(self.business),headers=self.header)
+		self.assertEqual(response.status_code,200)
+
 	def test_email_exist(self):
 		test=test_item.email_exist('kwame@gmail.com')
-		self.assertTrue(test)
+		self.assertFalse(test)
+
 	def test_name_exist(self):
 		test=test_item.name_exist('name')
-		self.assertTrue(test)
+		self.assertFalse(test)
+
 	def test_email_check(self):
 		test=test_item.email_check('name@gmail.com')
 		self.assertTrue(test)
+
 	def test_password_match(self):
 		test=test_item.password_match('name','name')
 		self.assertTrue(test)
+
 	def test_email_verification(self):
 		test=test_item.email_verification('name@gmail.com')
 		self.assertTrue(test)
+
 	def test_not_empty(self):
 		test=test_item.email_verification('name@gmail.com')
 		self.assertTrue(test)
