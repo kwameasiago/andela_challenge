@@ -1,8 +1,10 @@
 #testing status code
 import unittest
 from app import app
-from flask import json
+from flask import json 
+from models import Verification, Data_storage
 
+test_item=Verification()
 
 class registerTest(unittest.TestCase):
 	def setUp(self):
@@ -48,10 +50,28 @@ class registerTest(unittest.TestCase):
 		test=app.test_client('self')
 		response=test.post('/api/auth/reset-password',data=json.dumps(self.password_reset),headers=self.header)
 		self.assertEqual(response.status_code,200)
-	def test_business_update(self):
-		test=app.test_client('self')
-		response=test.put('/api/businesses/0',data=json.dumps(self.business),headers=self.header)
-		self.assertEqual(response.status_code,200)
+	def test_email_exist(self):
+		test=test_item.email_exist('kwame@gmail.com')
+		self.assertTrue(test)
+	def test_name_exist(self):
+		test=test_item.name_exist('name')
+		self.assertTrue(test)
+	def test_email_check(self):
+		test=test_item.email_check('name@gmail.com')
+		self.assertTrue(test)
+	def test_password_match(self):
+		test=test_item.password_match('name','name')
+		self.assertTrue(test)
+	def test_email_verification(self):
+		test=test_item.email_verification('name@gmail.com')
+		self.assertTrue(test)
+	def test_not_empty(self):
+		test=test_item.email_verification('name@gmail.com')
+		self.assertTrue(test)
+
+
+
+
 
 
 

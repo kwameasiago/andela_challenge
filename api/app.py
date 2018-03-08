@@ -36,6 +36,10 @@ register_business_model=api.model('register_business',{
 	'business_description':fields.String,
 	'business_owner':fields.String
 })
+review_model=api.model('review_model',{
+	'review':fields.String,
+	'business_id':fields.Integer
+	})
 
 #user registration endpoint
 @api.route('/api/auth/register')
@@ -53,11 +57,11 @@ class Register(Resource):
 			return {'Error':'email aready exists'}
 		elif user_obj.email_verification(new_user['email']) == False:
 			return {'Error':'Incorrect Email syntax'}
-		elif user_obj.not_empty(new_user['first_name']) == True:
+		elif user_obj.is_empty(new_user['first_name']) == True:
 			return {'Error':'first name can not be empty'}
-		elif user_obj.not_empty(new_user['last_name']) == True:
+		elif user_obj.is_empty(new_user['last_name']) == True:
 			return {'Error':'last name can not be empty'}			
-		elif user_obj.not_empty(new_user['password']) == True:
+		elif user_obj.is_empty(new_user['password']) == True:
 			return {'Error':'password can not be empty'}			
 		else:
 			new_user['user_id']=len(user_obj.user_data)+1
@@ -74,6 +78,8 @@ class login(Resource):
 		login_info=request.get_json()
 		if user_obj.email_verification(login_info['email']) == False:
 			return {'Error':'Incorrect Email Syntax'}
+		elif user_obj.is_empty(login_info['password']) == True:
+			return {'Error': 'password cannot be empty'}
 		else:
 			return login_info
 		
@@ -88,7 +94,9 @@ class logout(Resource):
 		if login_status == False:
 			return {'Error:':'not logged in'}
 		elif logout_info['confirm_logout'] == True:
-			return {'log out':True}
+			return {'logout':'logged out'}
+		elif logout_info['confirm_logout'] == False:
+			return {'logout': 'not logged out'}
 		else:
 			return {'Error':'invalid input'}
 
@@ -99,9 +107,9 @@ class passwordReset(Resource):
 	@api.expect(password_reset)
 	def post(self):
 		reset_info=request.get_json()
-		if user_obj.not_empty(reset_info['old_password'])== True:
+		if user_obj.is_empty(reset_info['old_password'])== True:
 			return {'Error':'can not be empty'}
-		elif user_obj.not_empty(reset_info['new_password']) == True:
+		elif user_obj.is_empty(reset_info['new_password']) == True:
 			return {'Error':'can not be empty'}
 		elif user_obj.password_match(reset_info['new_password'], reset_info['confirm_password']) == False:
 			return {'Error':'passwords do not match'}
@@ -115,11 +123,11 @@ class registerBusiness(Resource):
 	@api.expect(register_business_model)
 	def post(self):
 		business_info=request.get_json()
-		if user_obj.not_empty(business_info['business_name']) == True:
+		if user_obj.is_empty(business_info['business_name']) == True:
 			return {"Error":'fields are required'}
-		elif user_obj.not_empty(business_info['business_owner']) == True:
+		elif user_obj.is_empty(business_info['business_owner']) == True:
 			return {"Error":'fields are required'}
-		elif user_obj.not_empty(business_info['business_description']) == True:
+		elif user_obj.is_empty(business_info['business_description']) == True:
 			return {"Error":'fields are required'}
 		elif user_obj.name_exist(business_info['business_name']) == True:
 			return {'Error':'Business name exist pick another name'}
@@ -140,11 +148,11 @@ class updateBusiness(Resource):
 		businessId=businessId-1
 		update_info = user_obj.business_data[businessId]
 		new_update=request.get_json()
-		if user_obj.not_empty(new_update['business_name']) == True:
+		if user_obj.is_empty(new_update['business_name']) == True:
 			return {"Error":'fields are required'}
-		elif user_obj.not_empty(new_update['business_owner']) == True:
+		elif user_obj.is_empty(new_update['business_owner']) == True:
 			return {"Error":'fields are required'}
-		elif user_obj.not_empty(new_update['business_description']) == True:
+		elif user_obj.is_empty(new_update['business_description']) == True:
 			return {"Error":'fields are required'}
 		else:
 			update_info['business_name'] = new_update['business_name']
@@ -166,10 +174,28 @@ class updateBusiness(Resource):
 #add a review for a business
 @api.route('/api/businesses/<businessId>/reviews')
 class review(Resource):
-	def post(self):
-		pass
-	def get(self):
-		pass
+	@api.expect(review_model)
+	def post(self,businessId):
+		new_review=request.get_json()
+		new_review['business_id']=businessId
+		new_review['review_id']=len(user_obj.review_data)+1
+		user_obj.review_data.append(new_review)
+		return user_obj.review_data
+	def get(self,businessId):
+		#return user_obj.review_data
+		i=0
+		review=[]
+		while (i<len(user_obj.review_data)):
+			#review.append({'test':'123'})
+			item=user_obj.review_data[i]
+			if item['business_id'] == businessId:
+				review.append(item['review'])
+			i=i+1
+		return review
+
+
+
+		
 
 
 if __name__ == '__main__':
