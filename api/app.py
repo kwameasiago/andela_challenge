@@ -38,7 +38,6 @@ register_business_model=api.model('register_business',{
 })
 review_model=api.model('review_model',{
 	'review':fields.String,
-	'business_id':fields.Integer
 	})
 
 #user registration endpoint
@@ -62,13 +61,15 @@ class Register(Resource):
 		elif user_obj.is_empty(new_user['last_name']) == True:
 			return {'Error':'last name can not be empty'}			
 		elif user_obj.is_empty(new_user['password']) == True:
-			return {'Error':'password can not be empty'}			
+			return {'Error':'password can not be empty'}
+		elif user_obj.password_length(new_user['password']) == False:
+			return {'Error':'password is too short'}
 		else:
 			new_user['user_id']=len(user_obj.user_data)+1
 			del new_user['confirm_password']
 			user_obj.user_data.append(new_user)
-			new_user['password']=generate_password_hash(new_user['password'],'sha256')
-			return new_user
+			new_user['password']=generate_password_hash(new_user['password'],method='sha256')
+			return {'result':'user added'}
 
 
 @api.route('/api/auth/login')
@@ -80,9 +81,33 @@ class login(Resource):
 			return {'Error':'Incorrect Email Syntax'}
 		elif user_obj.is_empty(login_info['password']) == True:
 			return {'Error': 'password cannot be empty'}
+		elif user_obj.password_length(login_info['password']) == False:
+			return {'Error': 'password too short'}
 		else:
-			return login_info
-		
+			i=0
+			index=''
+			users=user_obj.user_data
+			while(i<len(users)):
+				temp=users[i]
+				if temp['email'] == login_info['email']:
+					index=i
+					break
+				i=i+1
+			if type(index) == str:
+				return {'result':'Email or password invalid'}
+			else:
+				x=users[index]
+				p1=login_info['password']
+				p2=x['password']
+				#y=generate_password_hash('x',method='sha256')
+				if check_password_hash(p2,p1) == True:
+					user_id=x['user_id']
+					first_name=x['first_name']
+					user_session={'id':user_id,'first_name':first_name}
+					user_obj.temp_login.append(user_session)
+					return {'result':'logged in'}
+				else:
+					return {'result':'Email or password invalid'}
 
 #user logout endpoint
 @api.route('/api/auth/logout')
@@ -90,15 +115,14 @@ class logout(Resource):
 	@api.expect(logout_model)
 	def post(self):
 		logout_info=request.get_json()
-		login_status = True
-		if login_status == False:
-			return {'Error:':'not logged in'}
-		elif logout_info['confirm_logout'] == True:
-			return {'logout':'logged out'}
-		elif logout_info['confirm_logout'] == False:
-			return {'logout': 'not logged out'}
+		if user_obj.login_check() == False:
+			return {'result':'Sorry you are not logged in'}
 		else:
-			return {'Error':'invalid input'}
+			if logout_info['confirm_logout'] == True:
+				del user_obj.temp_login[:]
+				return {'result':'you are logged out'}
+			else:
+				return {'result':'you are still logged in'}
 
 
 #user password reset
@@ -107,14 +131,24 @@ class passwordReset(Resource):
 	@api.expect(password_reset)
 	def post(self):
 		reset_info=request.get_json()
-		if user_obj.is_empty(reset_info['old_password'])== True:
+		if user_obj.login_check() == False:
+			return {'result':'sorry you are not logged in'}
+		elif user_obj.is_empty(reset_info['old_password'])== True:
 			return {'Error':'can not be empty'}
 		elif user_obj.is_empty(reset_info['new_password']) == True:
 			return {'Error':'can not be empty'}
 		elif user_obj.password_match(reset_info['new_password'], reset_info['confirm_password']) == False:
 			return {'Error':'passwords do not match'}
 		else:
-			return reset_info
+			data=user_obj.temp_login[0]
+			user_data=user_obj.user_data[data['id']-1]
+			if check_password_hash(user_data['password'],reset_info['old_password']):
+				del reset_info['confirm_password']
+				user_data['password']=generate_password_hash(reset_info['new_password'],method="sha256")
+				return {'result':'password changed'}
+			else:
+				#return {'result':'password fo not match'}
+				return {reset_info['old_password']:user_data['password']}
 
 
 #register Business
@@ -123,7 +157,9 @@ class registerBusiness(Resource):
 	@api.expect(register_business_model)
 	def post(self):
 		business_info=request.get_json()
-		if user_obj.is_empty(business_info['business_name']) == True:
+		if user_obj.login_check() == False:
+			return {'result':'sorry you are not logged in'}
+		elif user_obj.is_empty(business_info['business_name']) == True:
 			return {"Error":'fields are required'}
 		elif user_obj.is_empty(business_info['business_owner']) == True:
 			return {"Error":'fields are required'}
@@ -135,8 +171,12 @@ class registerBusiness(Resource):
 			business_info['id']=len(user_obj.business_data)+1
 			user_obj.business_data.append(business_info)
 			return {'result':'business added'}
+	
 	def get(self):
-		return user_obj.business_data
+		if len(user_obj.business_data) == 0:
+			return {'result':'no business found'}
+		else:
+			return user_obj.business_data
 
 						
 
@@ -146,29 +186,47 @@ class updateBusiness(Resource):
 	@api.expect(register_business_model)
 	def put(self,businessId):
 		businessId=businessId-1
-		update_info = user_obj.business_data[businessId]
 		new_update=request.get_json()
-		if user_obj.is_empty(new_update['business_name']) == True:
+		if user_obj.login_check() == False:
+			return {'result':'sorry you are not logged in'}
+		elif user_obj.is_empty(new_update['business_name']) == True:
 			return {"Error":'fields are required'}
 		elif user_obj.is_empty(new_update['business_owner']) == True:
 			return {"Error":'fields are required'}
 		elif user_obj.is_empty(new_update['business_description']) == True:
 			return {"Error":'fields are required'}
+		elif user_obj.name_exist(new_update['business_name']) == True:
+			return {'Error':'Business name exist pick another name'}		
 		else:
-			update_info['business_name'] = new_update['business_name']
-			update_info['business_owner']=new_update['business_owner']
-			update_info['business_description'] = new_update['business_description']
-			return new_update
+			try:
+				update_info = user_obj.business_data[businessId]
+				update_info['business_name'] = new_update['business_name']
+				update_info['business_owner']=new_update['business_owner']
+				update_info['business_description'] = new_update['business_description']
+				return {'Result':'Business updated'}
+			except IndexError:
+				return {'Result':'no business found'}
+
 
 	def delete(self,businessId):
 		businessId=businessId-1
-		new_update=user_obj.business_data[businessId]
-		user_obj.business_data.pop(businessId)
+		if user_obj.login_check() == False:
+			return {'result':'sorry you are not logged in'}
+		try:
+			new_update=user_obj.business_data[businessId]
+			user_obj.business_data.pop(businessId)
+			return {'Result':'deleted'}
+		except IndexError:
+			return {'Result':'no business found'}
+
 		return {'result':'deleted'}
 	def get(self,businessId):
 		businessId=businessId-1
-		new_update=user_obj.business_data[businessId]
-		return new_update
+		try:
+			new_update=user_obj.business_data[businessId]
+			return new_update
+		except IndexError:
+			return {'Result':'no business found'}
 
 
 #add a review for a business
@@ -176,22 +234,36 @@ class updateBusiness(Resource):
 class review(Resource):
 	@api.expect(review_model)
 	def post(self,businessId):
-		new_review=request.get_json()
-		new_review['business_id']=businessId
-		new_review['review_id']=len(user_obj.review_data)+1
-		user_obj.review_data.append(new_review)
-		return user_obj.review_data
+		if user_obj.login_check() == False:
+			return {'result':'sorry you are not logged in'}
+		elif user_obj.id_exist(int(businessId)) == True:
+			return {'result':'invalid index'}
+		elif user_obj.check_int(int(businessId)) == True:
+			return {'result':'invalid index'}
+		else:
+			new=request.get_json()
+			new['business_id']=businessId
+			user_obj.review_data.append(new)
+			return {'result':'review added'}
 	def get(self,businessId):
 		#return user_obj.review_data
 		i=0
 		review=[]
-		while (i<len(user_obj.review_data)):
-			#review.append({'test':'123'})
-			item=user_obj.review_data[i]
-			if item['business_id'] == businessId:
-				review.append(item['review'])
-			i=i+1
-		return review
+		if user_obj.id_exist(int(businessId)) == True:
+			return {'result':'invalid index'}
+		elif user_obj.check_int(int(businessId)) == True:
+			return {'result':'invalid index'}
+		else:
+			while (i<len(user_obj.review_data)):
+				#review.append({'test':'123'})
+				item=user_obj.review_data[i]
+				if item['business_id'] == businessId:
+					review.append(item['review'])
+				i=i+1
+			if len(review) == 0:
+				return {'result':'No reviews for this business'}
+			else:
+				return review
 
 
 
