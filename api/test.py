@@ -24,6 +24,11 @@ class registerTest(unittest.TestCase):
 		'confirm_password':'asd'
 
 		}
+		self.business={
+		'business_owner':'kwame',
+		'business_name':'sela danti',
+		'business_description':'sell designs'
+		}
 		self.header={'Content-type': 'application/json'}
 
 	def test_register_new(self):
@@ -42,6 +47,10 @@ class registerTest(unittest.TestCase):
 	def test_password_reset(self):
 		test=app.test_client('self')
 		response=test.post('/api/auth/reset-password',data=json.dumps(self.password_reset),headers=self.header)
+		self.assertEqual(response.status_code,200)
+	def test_business_update(self):
+		test=app.test_client('self')
+		response=test.put('/api/businesses/0',data=json.dumps(self.business),headers=self.header)
 		self.assertEqual(response.status_code,200)
 
 

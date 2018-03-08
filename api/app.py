@@ -24,13 +24,18 @@ login_model = api.model('login_info',{
 	'password':fields.String
 })
 logout_model=api.model('logout_model',{
-	'confirm_logout':fields.String('no')
+	'confirm_logout':fields.Boolean
 })
 password_reset=api.model('password_reset',{
 	'old_password':fields.String,
 	'new_password':fields.String,
 	'confirm_password':fields.String
-	})
+})
+register_business_model=api.model('register_business',{
+	'business_name':fields.String,
+	'business_description':fields.String,
+	'business_owner':fields.String
+})
 
 #user registration endpoint
 @api.route('/api/auth/register')
@@ -79,10 +84,11 @@ class logout(Resource):
 	@api.expect(logout_model)
 	def post(self):
 		logout_info=request.get_json()
-		if logout_info['confirm_logout'] == 'yes':
-			return {'Logged out' : True}
-		elif logout_info['confirm_logout'] == 'yes':
-			return {'log out':False}
+		login_status = True
+		if login_status == False:
+			return {'Error:':'not logged in'}
+		elif logout_info['confirm_logout'] == True:
+			return {'log out':True}
 		else:
 			return {'Error':'invalid input'}
 
@@ -106,31 +112,55 @@ class passwordReset(Resource):
 #register Business
 @api.route('/api/businesses')
 class registerBusiness(Resource):
-	@api.expect()
+	@api.expect(register_business_model)
 	def post(self):
-		pass
+		business_info=request.get_json()
+		if user_obj.not_empty(business_info['business_name']) == True:
+			return {"Error":'fields are required'}
+		elif user_obj.not_empty(business_info['business_owner']) == True:
+			return {"Error":'fields are required'}
+		elif user_obj.not_empty(business_info['business_description']) == True:
+			return {"Error":'fields are required'}
+		elif user_obj.name_exist(business_info['business_name']) == True:
+			return {'Error':'Business name exist pick another name'}
+		else:
+			business_info['id']=len(user_obj.business_data)+1
+			user_obj.business_data.append(business_info)
+			return {'result':'business added'}
+	def get(self):
+		return user_obj.business_data
+
+						
 
 #update a Business profile
-@api.route('/api/businesses/<businessId>')
+@api.route('/api/businesses/<int:businessId>')
 class updateBusiness(Resource):
-	@api.expect()
+	@api.expect(register_business_model)
 	def put(self,businessId):
-		pass
+		businessId=businessId-1
+		update_info = user_obj.business_data[businessId]
+		new_update=request.get_json()
+		if user_obj.not_empty(new_update['business_name']) == True:
+			return {"Error":'fields are required'}
+		elif user_obj.not_empty(new_update['business_owner']) == True:
+			return {"Error":'fields are required'}
+		elif user_obj.not_empty(new_update['business_description']) == True:
+			return {"Error":'fields are required'}
+		else:
+			update_info['business_name'] = new_update['business_name']
+			update_info['business_owner']=new_update['business_owner']
+			update_info['business_description'] = new_update['business_description']
+			return new_update
 
-#delete/view a business
-@api.route('/api/businesses/<businessId>')
-class Business(Resource):
-	@api.expect()
 	def delete(self,businessId):
-		pass
-	def get(self):
-		pass
-
-#get all business
-@api.route('/api/businesses')
-class getAllBusiness(Resource):
-	def get(self):
-		pass
+		businessId=businessId-1
+		new_update=user_obj.business_data[businessId]
+		user_obj.business_data.pop(businessId)
+		return {'result':'deleted'}
+	def get(self,businessId):
+		businessId=businessId-1
+		new_update=user_obj.business_data[businessId]
+		return new_update
 
 
 #add a review for a business
