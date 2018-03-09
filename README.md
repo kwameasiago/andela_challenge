@@ -30,3 +30,23 @@ AUTHORS
 Kwame Asiago original work
 
 
+TRAVIS CI
+https://travis-ci.org/SelaDanti/andela_challenge.svg?branch=api_v3
+https://travis-ci.org/SelaDanti/andela_challenge.svg?branch=master
+
+CI BADGE
+TEXT
+https://coveralls.io/repos/github/SelaDanti/andela_challenge/badge.svg?branch=master(Coverage Status)!:https://coveralls.io/github/SelaDanti/andela_challenge?branch=master
+
+RDOC
+[![Coverage Status](https://coveralls.io/repos/github/SelaDanti/andela_challenge/badge.svg?branch=master)](https://coveralls.io/github/SelaDanti/andela_challenge?branch=master)
+
+HTML
+{<img src="https://coveralls.io/repos/github/SelaDanti/andela_challenge/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/SelaDanti/andela_challenge?branch=master]
+
+HTML
+<a href='https://coveralls.io/github/SelaDanti/andela_challenge?branch=master'><img src='https://coveralls.io/repos/github/SelaDanti/andela_challenge/badge.svg?branch=master' alt='Coverage Status' /></a>
+
+RST
+.. image:: https://coveralls.io/repos/github/SelaDanti/andela_challenge/badge.svg?branch=master
+:target: https://coveralls.io/github/SelaDanti/andela_challenge?branch=master
