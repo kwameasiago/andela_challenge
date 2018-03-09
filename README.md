@@ -31,6 +31,7 @@ Kwame Asiago original work
 
 
 TRAVIS CI
+https://travis-ci.org/SelaDanti/andela_challenge.svg?branch=api_v3
 https://travis-ci.org/SelaDanti/andela_challenge.svg?branch=master
 
 CI BADGE
