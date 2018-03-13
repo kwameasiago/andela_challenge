@@ -31,6 +31,9 @@ class registerTest(unittest.TestCase):
 		'business_name':'sela danti',
 		'business_description':'sell designs'
 		}
+		self.review={
+		'review':'review'
+		}
 		self.header={'Content-type': 'application/json'}
 
 	def test_register_new(self):
@@ -65,6 +68,14 @@ class registerTest(unittest.TestCase):
 	def test_delete_business(self):
 		test=app.test_client('self')
 		response=test.delete('/api/businesses/0',data=json.dumps(self.business),headers=self.header)
+		self.assertEqual(response.status_code,200)
+	def test_review_business(self):
+		test=app.test_client('self')
+		response=test.post('/api/businesses/0/reviews',data=json.dumps(self.review),headers=self.header)
+		self.assertEqual(response.status_code,200)
+	def test_get_review_business(self):
+		test=app.test_client('self')
+		response=test.get('/api/businesses/0/reviews',data=json.dumps(self.review),headers=self.header)
 		self.assertEqual(response.status_code,200)
 
 	def test_email_exist(self):

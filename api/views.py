@@ -140,7 +140,7 @@ class passwordReset(Resource):
 				return {'result':'password changed'}
 			else:
 				#return {'result':'password fo not match'}
-				return {reset_info['old_password']:user_data['password']}
+				return {'Error':'New  Password does not match the old password'}
 
 
 #register Business
@@ -206,7 +206,9 @@ class updateBusiness(Resource):
 			return {'result':'sorry you are not logged in'}
 		try:
 			new_update=user_obj.business_data[businessId]
+			review=user_obj.review_data
 			user_obj.business_data.pop(businessId)
+
 			return {'Result':'deleted'}
 		except IndexError:
 			return {'Result':'no business found'}
@@ -238,7 +240,6 @@ class review(Resource):
 			user_obj.review_data.append(new)
 			return {'result':'review added'}
 	def get(self,businessId):
-		#return user_obj.review_data
 		i=0
 		review=[]
 		if user_obj.id_exist(int(businessId)) == True:
@@ -247,7 +248,6 @@ class review(Resource):
 			return {'result':'invalid index'}
 		else:
 			while (i<len(user_obj.review_data)):
-				#review.append({'test':'123'})
 				item=user_obj.review_data[i]
 				if item['business_id'] == businessId:
 					review.append(item['review'])

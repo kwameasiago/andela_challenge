@@ -5,7 +5,7 @@ from models import Data_storage,Verification
 
 
 app = Flask(__name__)
-api = Api(app)
+api = Api(app,title='We Connect',description='we connect api')
 user_obj = Verification()
 
 app.config.from_pyfile('config.py')
